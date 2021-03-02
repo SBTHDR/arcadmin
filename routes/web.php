@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/dashboard', 'backend.dashboard');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::group(['as' => 'app.', 'prefix' => 'app', 'namespace' => 'Backend', 'middleware' => ['auth']], function () {
-    Route::get('/dashboard', 'DashboardController')->name('dashboard');
+Route::group(['as' => 'app.', 'prefix' => 'app', 'middleware' => ['auth']], function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
