@@ -67,6 +67,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Manage Role</h5>
 
+                        <hr>
+
                         <div class="form-group">
                             <lebel for="name">Role Name</lebel>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -77,7 +79,60 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+
                         </div>
+
+                        <div>
+                            <strong>Manage permissions for roles</strong>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="select-all">
+                                <label for="select-all" class="custom-control-label">Select all</label>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        @forelse($modules->chunk(2) as $key => $chunks)
+                            <div class="form-row">
+                                @foreach($chunks as $key => $module)
+                                    <div class="col">
+                                        <h5>Module: {{ $module->name }}</h5>
+                                        @foreach($module->permissions as $key => $permission)
+                                            <div class="mb-3 ml-4">
+                                                <div class="custom-control custom-checkbox mb-2">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           id="permission-{{ $permission->id }}"
+                                                           name="permissions[]"
+                                                           value="{{ $permission->id }}"
+                                                    >
+                                                    <label for="permission-{{ $permission->id }}" class="custom-control-label">
+                                                        {{ $permission->name }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+                        @empty
+                            <div class="row">
+                                <div class="col text-center">
+                                    <strong>No modules found.</strong>
+                                </div>
+                            </div>
+                        @endforelse
+
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-plus-circle"></i>
+                            Create
+                        </button>
                     </div>
                 </form>
             </div>
@@ -87,6 +142,16 @@
 
 @push('js')
     <script>
-
+        $('#select-all').click(function () {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
     </script>
 @endpush
