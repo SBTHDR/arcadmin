@@ -84,6 +84,11 @@
 
                         <div>
                             <strong>Manage permissions for roles</strong>
+                            @error('permissions')
+                            <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <hr>

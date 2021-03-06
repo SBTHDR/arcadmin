@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RoleController extends Controller
 {
@@ -39,7 +40,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $this->validate($request, [
+            'name' => 'required|unique:roles',
+            'permissions' => 'required|array',
+            'permission.*' => 'integer'
+        ]);
+
+        Role::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ])->permissions()->sync($request->input('permissions'), []);
+        return redirect()->route('app.roles.index');
     }
 
     /**
