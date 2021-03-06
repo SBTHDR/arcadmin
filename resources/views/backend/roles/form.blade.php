@@ -8,12 +8,12 @@
                     <i class="pe-7s-users icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>Roles</div>
+                <div>{{ isset($role) ? 'Edit Role' : 'Create Role' }}</div>
             </div>
             <div class="page-title-actions">
-                <a href="{{ route('app.roles.create') }}" class="btn-shadow mr-3 btn btn-primary">
-                    <i class="fas fa-plus-circle"></i>
-                    Create Role
+                <a href="{{ route('app.roles.index') }}" class="btn-shadow mr-3 btn btn-primary">
+                    <i class="fas fa-arrow-circle-left"></i>
+                    Back To Roles
                 </a>
                 <div class="d-inline-block dropdown">
                     <div tabindex="-1" role="menu" aria-hidden="true"
@@ -64,6 +64,9 @@
             <div class="main-card mb-3 card">
                 <form action="{{ isset($role) ? route('app.roles.update', $role->id) : route('app.roles.store') }}" method="post">
                     @csrf
+                    @isset($role)
+                        @method('PUT')
+                    @endisset
                     <div class="card-body">
                         <h5 class="card-title">Manage Role</h5>
 
@@ -114,6 +117,11 @@
                                                            id="permission-{{ $permission->id }}"
                                                            name="permissions[]"
                                                            value="{{ $permission->id }}"
+                                                           @isset($role)
+                                                               @foreach($role->permissions as $rPermission)
+                                                                   {{ $permission->id == $rPermission->id ? 'checked' : '' }}
+                                                               @endforeach
+                                                           @endisset
                                                     >
                                                     <label for="permission-{{ $permission->id }}" class="custom-control-label">
                                                         {{ $permission->name }}
@@ -135,8 +143,13 @@
                         <hr>
 
                         <button type="submit" class="btn btn-primary w-100">
-                            <i class="fas fa-plus-circle"></i>
-                            Create
+                            @isset($role)
+                                <i class="fas fa-arrow-circle-up"></i>
+                                Update
+                            @else
+                                <i class="fas fa-plus-circle"></i>
+                                Create
+                            @endisset
                         </button>
                     </div>
                 </form>
