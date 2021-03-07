@@ -98,6 +98,7 @@
                                     <i class="fas fa-edit"></i>
                                     <span>Edit</span>
                                 </a>
+                                @if($role->deletable == true)
                                 <button type="button"
                                         onclick="deleteData({{ $role->id }})"
                                    class="btn btn-danger btn-sm">
@@ -108,6 +109,7 @@
                                     @csrf
                                     @method('DELETE')
                                 </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
