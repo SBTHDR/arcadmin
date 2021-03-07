@@ -99,10 +99,15 @@
                                     <span>Edit</span>
                                 </a>
                                 <button type="button"
+                                        onclick="deleteData({{ $role->id }})"
                                    class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt"></i>
                                     <span>Delete</span>
                                 </button>
+                                <form id="delete-form-{{ $role->id }}" method="POST" action="{{ route('app.roles.destroy', $role->id) }}" hidden>
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
                         </tr>
                         @endforeach
