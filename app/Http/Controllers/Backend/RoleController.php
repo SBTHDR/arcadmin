@@ -50,6 +50,8 @@ class RoleController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name)
         ])->permissions()->sync($request->input('permissions'), []);
+
+        notify()->success('created successfully', 'Role');
         return redirect()->route('app.roles.index');
     }
 
@@ -90,6 +92,8 @@ class RoleController extends Controller
             'slug' => Str::slug($request->name)
         ]);
         $role->permissions()->sync($request->input('permissions'), []);
+
+        notify()->success('updated successfully', 'Role');
         return redirect()->route('app.roles.index');
     }
 
@@ -103,8 +107,9 @@ class RoleController extends Controller
     {
         if ($role->deletable) {
             $role->delete();
+            notify()->success('deleted successfully', 'Role');
         } else {
-            
+            notify()->error('system role is not deletable', 'Error');
         }
         return back();
     }
