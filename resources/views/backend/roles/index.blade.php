@@ -71,28 +71,28 @@
                     <table id="datatable" class="align-middle mb-0 table table-borderless table-striped table-hover">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Permissions</th>
-                            <th class="text-center">Updated At</th>
-                            <th class="text-center">Actions</th>
+                            <th class="">#</th>
+                            <th class="">Name</th>
+                            <th class="">Permissions</th>
+                            <th class="">Updated At</th>
+                            <th class="">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($roles as $key => $role)
                             <tr>
-                            <td class="text-center text-muted">{{ $key + 1 }}</td>
+                            <td class=" text-muted">{{ $key + 1 }}</td>
 
-                            <td class="text-center">{{ $role->name }}</td>
-                            <td class="text-center">
+                            <td class="">{{ $role->name }}</td>
+                            <td class="">
                                 @if($role->permissions->count() > 0)
                                     <span class="badge badge-info">{{ $role->permissions->count() }}</span>
                                 @else
                                     <span class="badge badge-warning">No permissions</span>
                                 @endif
                             </td>
-                                <td class="text-center">{{ $role->updated_at->diffForHumans() }}</td>
-                            <td class="text-center">
+                                <td class="">{{ $role->updated_at->diffForHumans() }}</td>
+                            <td class="">
                                 <a href="{{ route('app.roles.edit', $role->id) }}"
                                         class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i>
