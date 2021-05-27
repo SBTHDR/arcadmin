@@ -16,7 +16,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        Gate::authorize('admin-dashboard');
+        Gate::authorize('app.dashboard');
         return view('backend.dashboard');
     }
 }
