@@ -1,10 +1,10 @@
-# arcadmin Multivendor Admin system
+# Arc-Admin Admin starter system
 
 ## About Repository
 
-Fashi is a multivendor eCommerce system based on Laravel 8.
-Frontend system provide a simple online interface to order products from online.
-Backend system provide a complete management of products by category CRUD.
+Arc-Admin is an Admin starter system based on Laravel 8. 
+Backend system provide a complete management of admin CRUD, 
+with full role and permission based authentication and authorization.
 
 ## Tech Specification
 
@@ -13,20 +13,17 @@ Backend system provide a complete management of products by category CRUD.
 - Bootstrap 4
 - Font Awesome 5
 - Intervention Image
-- alertify js
+- iziToast
+- sweetalert
 
 ## Features
 
-- Basic ecommerce system
-- Login, Register, as default auth
-- Show, update, edit, and delete products as admin
-- Show, update, edit, and delete category as admin
-- Show, update, edit, and delete brands as admin
-- Search Products
-- product checkout
-- local payment system
-- user dashboard
-- Authorization
+- User Role and permission Management
+- Role and permission based Authentication
+- Role and permission based Authorization
+- Show, update, edit, and delete user as admin
+- Email activation and notifications
+- page builder
 
 ## Installation
 
