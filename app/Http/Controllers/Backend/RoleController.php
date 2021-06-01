@@ -99,7 +99,7 @@ class RoleController extends Controller
         ]);
         $role->permissions()->sync($request->input('permissions'));
 
-        notify()->success('updated successfully', 'Role');
+        notify()->success('Updated Successfully', 'Role');
         return redirect()->route('app.roles.index');
     }
 
